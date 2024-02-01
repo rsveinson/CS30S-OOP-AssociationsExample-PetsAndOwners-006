@@ -48,18 +48,34 @@ public class CatAndOwnerDriver {
         Cat cat = new Cat();
         Cat otherCat = new Cat(2, "Mittens");
         
-        System.out.println(cat);
+        //System.out.println(cat);
+        //System.out.println(otherCat);
+        
+        // use the utility output method
+        System.out.println("My Cat: " + cat.getHandle());
         
         // owners
         Owner me = new Owner("Bob Marley");
         Owner you = new Owner("Peter Tosh");
-        System.out.println(me);
+        //System.out.println(me);
         
         // associations
-        me.addCat(cat);
-        me.addCat(otherCat);
+        /* these two lines are not longer
+         * needed since we wil be
+         * using the static method to set the
+         * associations
+         */
+        // me.addCat(cat);
+        // me.addCat(otherCat);
+        
+        adoptACat(cat, me);
+        adoptACat(otherCat, me);
+        adoptACat(new Cat(5, "Rincewind"), you);
+        Cat anotherCat = new Cat(4, "Emerson");
+        adoptACat(anotherCat, you);
         
         System.out.println(me);
+        System.out.println(you);
         
         // ***** Print Formatted Output *****
 
@@ -67,12 +83,13 @@ public class CatAndOwnerDriver {
 
         System.out.println();
         System.out.println(pInfo.getClosingMessage());
-        //fout.println("End of Processing");
-
-        // **** close io buffers *****
-
-        //fin.close();
-        //fout.close();
+        
     } // end main 
+    
+    // add the setAssociation() static method
+    public static void adoptACat(Cat c, Owner o){
+        c.setOwner(o);
+        o.addCat(c);
+    }// end adoptACat
 
 } // end FormatTemplate

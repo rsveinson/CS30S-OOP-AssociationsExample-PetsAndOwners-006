@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class Owner {
     //*** Class Variables ***
+    final static String nl = System.lineSeparator();
     
     //*** Instance Variables ***
     private String name;
@@ -31,17 +32,6 @@ public class Owner {
         name = n;
         cats = new ArrayList<Cat>();
     }// end full-arg
-    
-    /*****************************************
-    * Description: brief description of the methods purpose
-    * 
-    * Interface:
-    * 
-    * @param        each parameter of the method should be listed with an @param
-    * @param        parametername description of parameter
-    * 
-    * @return       any return value will be noted here
-    * ****************************************/
         
     //*** Getters ***
     
@@ -73,15 +63,44 @@ public class Owner {
     
     public void addCat(Cat c){
         cats.add(c);
-        c.setOwner(this);
+        
+        // there's another way to take care of
+        // of setting the associations between
+        // cats and their owners
+        //45c.setOwner(this);
     }// end add cat
     
     @Override
     public String toString(){
-        String st = this.name + ":\n";
-        st += cats;
+        StringBuilder st = new StringBuilder();
+        st.append(this.name + ":" + nl);
+        st.append("Cats:");
         
-        return st;
+        if(cats.size() == 0){
+            st.append("no cats" + nl);
+        }// end no cats
+        
+        for(Cat c : cats){
+            st.append(c.getName() + ": ");
+        }// end cats
+        st.append(nl + "------------------------" + nl + nl);
+        
+        // potential hazards
+        //String str = "Cats: " + cats;
+
+        return st.toString();
     }
     
 } // end of public class
+
+    
+    /*****************************************
+    * Description: brief description of the methods purpose
+    * 
+    * Interface:
+    * 
+    * @param        each parameter of the method should be listed with an @param
+    * @param        parametername description of parameter
+    * 
+    * @return       any return value will be noted here
+    * ****************************************/
